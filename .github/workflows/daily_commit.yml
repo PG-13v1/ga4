@@ -15,7 +15,7 @@ jobs:
         with:
           token: ${{ secrets.GH_PAT }}  # Use the PAT instead of GITHUB_TOKEN
 
-      - name: Set up Git
+      - name: 25ds1000038@ds.study.iitm.ac.in
         run: |
           git config --global user.name "GitHub Actions Bot"
           git config --global user.email "25ds1000038@ds.study.iitm.ac.in"
