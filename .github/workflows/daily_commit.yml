@@ -7,24 +7,56 @@ on:
 
 jobs:
   daily_commit:
-    runs-on: ubuntu-latest
+    runs-on:The job is failing because the GitHub Actions bot does not have permission to push changes to the repository. To ubuntu-latest
 
     steps:
-      - name: Checkout Repository
+      - name: Checkout Repository fix this issue, ensure the personal access token (PAT) is correctly set in the repository secrets as `GH
         uses: actions/checkout@v4
 
-      - name: Set up Git
+      -_PAT`.
+
+Here's the updated workflow file:
+
+```yaml
+name: Daily Commit Automation
+
+on:
+  schedule:
+    name: Set up Git
         run: |
           git config --global user.name "GitHub Actions Bot"
-          git config --global user.email "25ds1000038@ds.study.iitm.ac.in"
+          git - cron: '0 0 * * *'  # Runs daily at midnight UTC
+  workflow_dispatch:  # Allows manual triggering of config --global user.email "25ds1000038@ds.study.i the workflow
+
+jobs:
+  daily_commit:
+    runs-on:itm.ac.in"
+
+      - name: Authenticate with PAT
+        ubuntu-latest
+
+    steps:
+      - name: Checkout Repository run: |
+          git remote set-url origin https
+        uses: actions/checkout@v4
+
+      -://x-access-token:${{ secrets.GH_PAT }}@github.com name: Set up Git
+        run: |
+          git config --global user.name "GitHub Actions Bot"
+          git config/PG-13v1/ga4.git
+
+      - name: Make a Commit
+        --global user.email "25ds1000038@ds.study.iitm.ac.in"
 
       - name: Authenticate with PAT
         run: |
-          git remote set-url origin https://x-access-token:${{ secrets.GH_PAT }}@github.com/PG-13v1/ga4.git
+          echo "Last run: $(date)" > last_run.txt run: |
+          git remote set-url origin https
+          git add last_run.txt
+          git commit -m "Automated daily update - $(date)" || echo://x-access-token:${{ secrets.GH_PAT }}@github.com/PG-13v1/ga4.git
 
       - name: Make a Commit
         run: |
           echo "Last run: $(date)" > last_run.txt
-          git add last_run.txt
-          git commit -m "Automated daily update - $(date)" || echo "No changes to commit"
+          "No changes to commit"
           git push origin main
