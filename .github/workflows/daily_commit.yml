@@ -3,7 +3,6 @@ name: Daily Commit Automation
 on:
   schedule:
     - cron: '0 0 * * *'  # Runs daily at midnight UTC
-
   workflow_dispatch:  # Allows manual triggering of the workflow
 
 jobs:
@@ -17,7 +16,11 @@ jobs:
       - name: Set up Git
         run: |
           git config --global user.name "GitHub Actions Bot"
-          git config --global user.email "25ds1000038@ds.study.iitm.ac.in"
+          git config --global user.email "your-email@example.com"
+
+      - name: Authenticate with PAT
+        run: |
+          git remote set-url origin https://x-access-token:${{ secrets.GH_PAT }}@github.com/your-username/your-repo.git
 
       - name: Make a Commit
         run: |
