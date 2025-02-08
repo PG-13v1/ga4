@@ -3,7 +3,7 @@ name: Daily Commit Automation
 on:
   schedule:
     - cron: '0 0 * * *'  # Runs daily at midnight UTC
-  workflow_dispatch:  # Allows manual triggering of the workflow
+  workflow_dispatch:  # Allows manual triggering
 
 jobs:
   daily_commit:
@@ -12,23 +12,20 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GH_PAT }}  # Use the PAT here
 
       - name: Set up Git
         run: |
           git config --global user.name "GitHub Actions Bot"
           git config --global user.email "25ds1000038@ds.study.iitm.ac.in"
 
-      - name: Authenticate with PAT
+      - name: Make a Dummy Commit
         run: |
-          git remote set-url origin https://x-access-token:${{ secrets.GH_PAT }}@github.com/PG-13v1/ga4.git
+          git commit --allow-empty -m "Automated daily commit - $(date)" || echo "No changes to commit"
 
-      - name: Make a Commit
+      - name: Push Changes
         run: |
-          echo "Last run: $(date)" > last_run.txt
-          git add last_run.txt
-          git commit -m "Automated daily update - $(date)" || echo "No changes to commit"
           git push origin main || echo "No changes to push"
-
-          echo "Last run: $(date)" > last_run.txt
-          "No changes to commit"
-          git push origin main
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_PAT }}  # Use the PAT here
