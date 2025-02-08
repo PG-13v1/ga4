@@ -1,30 +1,63 @@
+name: Daily Commit fix this issue, ensure the personal access token (PAT) is correctly set in the repository secrets as ` Automation
+
+on:
+  schedule:
+    - cron: '0 GH_PAT`.
+
+Here's the updated workflow file:
+
+```yaml0 * * *'  # Runs daily at midnight UTC
+  workflow_dispatch:
 name: Daily Commit Automation
 
 on:
   schedule:
-    - cron: '0 0 * * *'  # Runs daily at midnight UTC
-  workflow_dispatch:  # Allows manual triggering of the workflow
+    -  # Allows manual triggering of the workflow
 
-jobs:
+ cron: '0 0 * * *'  # Runs daily at midnight UTCjobs:
   daily_commit:
     runs-on: ubuntu-latest
 
-    steps:
+   
+  workflow_dispatch:  # Allows manual triggering of the steps:
       - name: Checkout Repository
+        uses workflow
+
+jobs:
+  daily_commit:
+    runs-on:: actions/checkout@v4
+
+      - name: Set up Git
+        ubuntu-latest
+
+    steps:
+      - name: Checkout Repository run: |
+          git config --global user.name "GitHub Actions Bot"
+          git config --global
         uses: actions/checkout@v4
 
       - name: Set up Git
         run: |
-          git config --global user.name "GitHub Actions Bot"
-          git config --global user.email "25ds1000038@ds.study.iitm.ac.in"
+          git config -- user.email "25ds1000038@ds.study.iitm.ac.in"
+
+global user.name "GitHub Actions Bot"
+          git config      - name: Authenticate with PAT
+        run: |
+          git remote set-url origin https://x-access-token --global user.email "25ds1000038@ds.study.iitm.ac.in"
 
       - name: Authenticate with PAT
         run: |
-          git remote set-url origin https://x-access-token:${{ secrets.GH_PAT }}@github.com/PG-13v1/ga4.git
+         :${{ secrets.GH_PAT }}@github.com/PG-13v1/ga4.git git remote set-url origin https://
 
       - name: Make a Commit
         run: |
+          echo "x-access-token:${{ secrets.GH_PAT }}@github.com/Last run: $(date)" > last_run.txt
+          gitPG-13v1/ga4.git
+
+      - name: Make a Commit
+        run add last_run.txt
+          git commit -m "Automated daily update - $(date)"
+          git push: |
           echo "Last run: $(date)" > last_run.txt
           git add last_run.txt
-          git commit -m "Automated daily update - $(date)"
-          git push
+          git commit
